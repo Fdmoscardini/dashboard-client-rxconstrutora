@@ -1,0 +1,15 @@
+{
+  "short_name": "RX Painel",
+  "name": "RX Construtora Painel",
+  "icons": [
+    {
+      "src": "./assets/img/faviconrx.png",
+      "sizes": "100x100",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
