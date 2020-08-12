@@ -30,6 +30,8 @@ class Login extends Component {
         await localStorage.setItem('idConstruction', result.data.idConstruction);
         await localStorage.setItem('latitude', result.data.latitude);
         await localStorage.setItem('longitude', result.data.longitude);
+        await localStorage.setItem('responsible', result.data.responsible);
+        await localStorage.setItem('contact', result.data.contact);
         window.location.href = '/';
       } else {
         this.setState({ 'error': 'Usuário ou senha incorretos' });
