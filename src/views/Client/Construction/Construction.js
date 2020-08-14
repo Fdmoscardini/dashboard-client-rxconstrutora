@@ -500,6 +500,7 @@ class Construction extends Component {
                                             <th style={{ width: 2 + '%' }}></th>
                                             <th>Produto</th>
                                             <th>Veículo</th>
+                                            <th>Placa</th>
                                             <th>Motorista</th>
                                             <th>Qtd.</th>
                                             <th style={{ width: 3 + '%' }}>Unid.</th>
@@ -519,7 +520,7 @@ class Construction extends Component {
                                                 <>
                                                     {(index == 0 || groupDate == true) &&
                                                         <tr>
-                                                            <th colSpan={7}>
+                                                            <th colSpan={8}>
                                                                 {moment(date).add(1, 'days').subtract('seconds', 3600).format('dddd') + ' ' + moment(date).add(1, 'days').subtract('seconds', 3600).format('LL')}
                                                             </th>
                                                         </tr>
@@ -529,6 +530,7 @@ class Construction extends Component {
                                                         <td><img src={this.state.images[item.REFERENCIA]} style={{ width: 40 + 'px' }} /></td>
                                                         <td>{item.DESCRICAO}</td>
                                                         <td>{item.EQUIPAMENTO}</td>
+                                                        <td>{item.CHASSI}</td>
                                                         <td>{item.NOME}</td>
                                                         <td>{item.QTDMOV}</td>
                                                         <td>{item.SIGLA}</td>
