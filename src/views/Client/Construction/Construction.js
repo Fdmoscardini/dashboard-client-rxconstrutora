@@ -319,9 +319,12 @@ class Construction extends Component {
                                         <hr />
                                     </Col>
                                     <Col xs="12" md="8" xl="8">
-                                        <h4>Responsável técnico:</h4>
+                                        <h4>Gestor do contrato:</h4>
                                         <h6>{localStorage.getItem('responsible')}</h6>
-                                        <h6>Contatos: {localStorage.getItem('contact')}</h6>
+                                        <h6>Contato: {localStorage.getItem('contact')}</h6>
+                                        <h4>Gestor da obra:</h4>
+                                        <h6>{localStorage.getItem('responsible2')}</h6>
+                                        <h6>Contato: {localStorage.getItem('contact2')}</h6>
                                         <h6>Atualmente {this.state.employees.length} funcionários trabalhando na obra</h6>
                                     </Col>
                                     <Col xs="12" md="4" xl="4">
