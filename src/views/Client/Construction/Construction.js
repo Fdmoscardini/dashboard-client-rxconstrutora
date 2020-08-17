@@ -15,6 +15,7 @@ import {
 } from 'reactstrap';
 import 'chartjs-plugin-datalabels';
 import Calendar from '../../Components/Calendar/Calendar';
+import { PDFReader } from 'react-read-pdf'
 
 import axios from "axios";
 
@@ -50,6 +51,9 @@ class Construction extends Component {
             weather: {},
             curTime: '',
             modalSchedule: false,
+            modalViewPdf: false,
+            itemDetailMeasurement: {},
+            showPdf: false,
             measurementSheet: [],
             styleCardMovement: { padding: 0 + 'px' },
             images: {
@@ -91,10 +95,22 @@ class Construction extends Component {
         };
     }
 
-    toggleModalSchedule() {
+    toggleModalSchedule = () => {
         this.setState({
             modalSchedule: !this.state.modalSchedule,
         });
+    }
+
+    toggleModalViewPdf = (item = {}) => {
+        this.setState({
+            modalViewPdf: !this.state.modalViewPdf,
+            showPdf: false
+        });
+
+        if( item.data ) {
+            console.log(item.data.observ);
+            this.setState({ itemDetailMeasurement: item.data });
+        }
     }
 
     getMovement = async (id) => {
@@ -229,7 +245,6 @@ class Construction extends Component {
         try {
             let items = [];
             let measurement = await crud.get('construction/measurement_sheet/' + id);
-            console.log(measurement);
             //let occurrences = await crud.get('construction/occurrences/' + id);
 
             if (measurement.status == 200) {
@@ -246,22 +261,23 @@ class Construction extends Component {
         }
     }
 
-    componentDidMount(){
+    async componentDidMount(){
         setInterval(() => {
             this.setState({
-                curTime: new Date().toLocaleString()
+                curTime: new Date().toLocaleString(),
             })
         }, 1000);
 
         let id = localStorage.getItem('idConstruction');
         this.getWeather();
         this.getTotalProduction(id);
-        this.getProvided(id);
-        this.getStockConstruction(id);
         this.getDetailedPosition(id);
         this.getConstruction(id);
         this.getMeasurementSheet(id);
         this.getMovement(id);
+
+        await this.getStockConstruction(id);
+        await this.getProvided(id);
     }
 
     loading = () => <div className="animated fadeIn pt-1 text-center">Carregando...</div>
@@ -608,10 +624,34 @@ class Construction extends Component {
                     <ModalHeader toggle={() => this.toggleModalSchedule()}>Medições</ModalHeader>
                     <ModalBody style={{ padding: 0 + 'px' }}>
                         {!this.state.loadingMeasurementSheet &&
-                            <Calendar measurementSheet={this.state.measurementSheet} />}
+                            <Calendar toggleModalViewPdf={this.toggleModalViewPdf} measurementSheet={this.state.measurementSheet} />}
                     </ModalBody>
                     <ModalFooter>
                         <Button color="secondary" onClick={() => this.toggleModalSchedule()}>Fechar</Button>
+                    </ModalFooter>
+                </Modal>
+
+                <Modal isOpen={this.state.modalViewPdf} toggle={() => this.toggleModalViewPdf()} className={'modal-lg ' + this.props.className} style={{ maxWidth: isBrowser ? 90 + '%' : 100 + '%' }}>
+                    <ModalHeader toggle={() => this.toggleModalViewPdf()}>Relatório diário</ModalHeader>
+                    <ModalBody style={{ padding: 0 + 'px' }}>
+                        <div style={{ overflowX: 'scroll' }} hidden={!this.state.showPdf}>
+                            {this.state.itemDetailMeasurement.observ && 
+                            <PDFReader 
+                                url={String(this.state.itemDetailMeasurement.observ)} 
+                                onDocumentComplete={(item) => this.setState({showPdf: true})}
+                                showAllPage={true}
+                            />}
+                        </div>
+                        <div hidden={this.state.showPdf}>
+                            <center>
+                                {!isBrowser
+                                ? <img style={{ width: 100 + '%' }} src={'http://www.rxconstrutora.com.br/site/wp-content/uploads/2020/06/rx_vinheta4.gif'} />
+                                : <img style={{ width: 70 + '%' }} src={'http://www.rxconstrutora.com.br/site/wp-content/uploads/2020/06/rx_vinheta10.gif'} />}
+                            </center>
+                        </div>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="secondary" onClick={() => this.toggleModalViewPdf()}>Fechar</Button>
                     </ModalFooter>
                 </Modal>
             </div>

@@ -51,6 +51,7 @@
     "react-input-mask": "^2.0.4",
     "react-intl-currency-input": "^0.2.3",
     "react-map-gl": "^5.2.5",
+    "react-read-pdf": "^2.0.9",
     "react-router-config": "^5.1.1",
     "react-router-dom": "^5.1.2",
     "react-test-renderer": "^16.12.0",

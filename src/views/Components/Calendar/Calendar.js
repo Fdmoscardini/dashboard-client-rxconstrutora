@@ -35,7 +35,7 @@ const resources = [{
     instances: owners,
 }];
 
-let toggleModalMeasurementOrOccurrence = '';
+let toggleModalViewPdf = '';
 
 const getBorder = theme => (`1px solid ${
     theme.palette.type === 'light'
@@ -217,7 +217,12 @@ const Appointment = withStyles(styles, { name: 'Appointment' })(({ classes, ...r
     <Appointments.Appointment
         {...restProps}
         className={classes.appointment}
-        style={{ fontSize: 20 }}
+        style={{ fontSize: 16 }}
+        onClick={(item) => {
+            if(item.data.observ) {
+                toggleModalViewPdf(item);
+            }
+        }}
     />
 ));
 
@@ -239,7 +244,7 @@ export default class Demo extends React.PureComponent {
             //data: appointments
         };
 
-        toggleModalMeasurementOrOccurrence = this.props.toggleModalMeasurementOrOccurrence;
+        toggleModalViewPdf = this.props.toggleModalViewPdf;
 
         this.commitChanges = this.commitChanges.bind(this);
     }
