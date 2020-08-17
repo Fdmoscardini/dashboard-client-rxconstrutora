@@ -275,6 +275,7 @@ class Construction extends Component {
         this.getConstruction(id);
         this.getMeasurementSheet(id);
         this.getMovement(id);
+        this.getEmployees(id);
 
         await this.getStockConstruction(id);
         await this.getProvided(id);
