@@ -62,8 +62,8 @@ class Login extends Component {
                         <Input 
                           type="text" 
                           refs="email"
-                          placeholder="E-mail" 
-                          autoComplete="e-mail"
+                          placeholder="Usuário" 
+                          autoComplete="usuário"
                           value={this.state.email}
                           onChange={(value) => this.setState({
                             email: value.target.value.toLowerCase()
