@@ -8,8 +8,13 @@ import {
     Row,
     Table,
     Button,
+    Modal,
+    ModalHeader,
+    ModalBody,
+    ModalFooter
 } from 'reactstrap';
 import 'chartjs-plugin-datalabels';
+import Calendar from '../../Components/Calendar/Calendar';
 
 import axios from "axios";
 
@@ -44,6 +49,8 @@ class Construction extends Component {
             movement: [],
             weather: {},
             curTime: '',
+            modalSchedule: false,
+            measurementSheet: [],
             styleCardMovement: { padding: 0 + 'px' },
             images: {
                 'MEIO-FIO-65': 'http://www.rxconstrutora.com.br/site/wp-content/uploads/2020/06/meiofio.png',
@@ -82,6 +89,12 @@ class Construction extends Component {
                 'REPARODEPISO': 1,
             },
         };
+    }
+
+    toggleModalSchedule() {
+        this.setState({
+            modalSchedule: !this.state.modalSchedule,
+        });
     }
 
     getMovement = async (id) => {
@@ -212,6 +225,27 @@ class Construction extends Component {
         }
     }
 
+    getMeasurementSheet = async (id) => {
+        try {
+            let items = [];
+            let measurement = await crud.get('construction/measurement_sheet/' + id);
+            console.log(measurement);
+            //let occurrences = await crud.get('construction/occurrences/' + id);
+
+            if (measurement.status == 200) {
+                items = measurement.data;
+                //items.push(...occurrences.data);
+
+                this.setState({
+                    loadingMeasurementSheet: false,
+                    measurementSheet: items,
+                });
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     componentDidMount(){
         setInterval(() => {
             this.setState({
@@ -226,7 +260,7 @@ class Construction extends Component {
         this.getStockConstruction(id);
         this.getDetailedPosition(id);
         this.getConstruction(id);
-        this.getEmployees(id);
+        this.getMeasurementSheet(id);
         this.getMovement(id);
     }
 
@@ -274,7 +308,7 @@ class Construction extends Component {
                                         <h6>Atualmente {this.state.employees.length} funcionários trabalhando na obra</h6>
                                     </Col>
                                     <Col xs="12" md="4" xl="4">
-                                        <Button block color="success" style={{ float: 'right', marginTop: isBrowser ? 8 : 25, marginBottom: 12 }} onClick={() => console.log('teste')}>
+                                        <Button block color="success" style={{ float: 'right', marginTop: isBrowser ? 8 : 25, marginBottom: 12 }} onClick={() => this.toggleModalSchedule()}>
                                             Visualizar díario
                                         </Button>
                                     </Col>
@@ -570,35 +604,16 @@ class Construction extends Component {
                     </Col>
                 </Row>
 
-                {/*<Row>
-                    <Col xs="12" lg="6">
-                        <Card>
-                        <CardHeader>
-                            <strong>
-                                FUNCIONÁRIOS
-                            </strong>
-                        </CardHeader>
-                            <CardBody style={{ padding: 0 + 'px' }}>
-                                <Table responsive>
-                                <thead>
-                                    <tr>
-                                        <th style={{ width: 42 + '%' }}>NOME</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {this.state.employees.map((item, index) => (
-                                    <tr key={index}>
-                                        <td>
-                                            {item.NOME}
-                                        </td>
-                                    </tr>
-                                    ))}
-                                </tbody>
-                                </Table>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>*/}
+                <Modal isOpen={this.state.modalSchedule} toggle={() => this.toggleModalSchedule()} className={'modal-lg ' + this.props.className} /*style={{ maxWidth: isBrowser ? 90 + '%' : 100 + '%' }}*/>
+                    <ModalHeader toggle={() => this.toggleModalSchedule()}>Medições</ModalHeader>
+                    <ModalBody style={{ padding: 0 + 'px' }}>
+                        {!this.state.loadingMeasurementSheet &&
+                            <Calendar measurementSheet={this.state.measurementSheet} />}
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="secondary" onClick={() => this.toggleModalSchedule()}>Fechar</Button>
+                    </ModalFooter>
+                </Modal>
             </div>
         );
     }
