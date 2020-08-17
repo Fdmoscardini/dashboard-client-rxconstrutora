@@ -322,6 +322,7 @@ class Construction extends Component {
                                         <h4>Gestor do contrato:</h4>
                                         <h6>{localStorage.getItem('responsible')}</h6>
                                         <h6>Contato: {localStorage.getItem('contact')}</h6>
+                                        <br/>
                                         <h4>Gestor da obra:</h4>
                                         <h6>{localStorage.getItem('responsible2')}</h6>
                                         <h6>Contato: {localStorage.getItem('contact2')}</h6>
