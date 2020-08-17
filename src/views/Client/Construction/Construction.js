@@ -187,6 +187,31 @@ class Construction extends Component {
         }
     }
 
+    getProvided = async (id) => {
+        try {
+            let provided = await crud.get('construction/provided_construction/' + id);
+            if (provided.status == 200) {
+                this.setState({
+                    products: provided.data
+                });
+                //percorre para verificar o produto que não foi enviado
+                provided.data.forEach((item, index) => {
+                    this.state.stock.forEach((stock, index2) => {
+                        if (stock.IDPRODUTO == item.IDPRODUTO) {
+                            delete provided.data[index];
+                        }
+                    })
+                });
+                this.setState({
+                    loading: false,
+                    provided: provided.data,
+                });
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     componentDidMount(){
         setInterval(() => {
             this.setState({
@@ -197,6 +222,7 @@ class Construction extends Component {
         let id = localStorage.getItem('idConstruction');
         this.getWeather();
         this.getTotalProduction(id);
+        this.getProvided(id);
         this.getStockConstruction(id);
         this.getDetailedPosition(id);
         this.getConstruction(id);
@@ -241,11 +267,16 @@ class Construction extends Component {
                                     <Col xs="12" md="12" xl="12">
                                         <hr />
                                     </Col>
-                                    <Col xs="12" md="6" xl="6">
+                                    <Col xs="12" md="8" xl="8">
                                         <h4>Responsável técnico:</h4>
                                         <h6>{localStorage.getItem('responsible')}</h6>
                                         <h6>Contatos: {localStorage.getItem('contact')}</h6>
                                         <h6>Atualmente {this.state.employees.length} funcionários trabalhando na obra</h6>
+                                    </Col>
+                                    <Col xs="12" md="4" xl="4">
+                                        <Button block color="success" style={{ float: 'right', marginTop: isBrowser ? 8 : 25, marginBottom: 12 }} onClick={() => console.log('teste')}>
+                                            Visualizar díario
+                                        </Button>
                                     </Col>
                                 </Row>
                             </CardBody>
@@ -387,11 +418,9 @@ class Construction extends Component {
                                 (item.REFERENCIA != 'REPARODEMEIOFIO' && item.REFERENCIA != 'REPARODEPISO') &&
                                 <tr key={index}>
                                     <td><img src={this.state.images[item.REFERENCIA]} style={{ width: 40 + 'px' }} /></td>
-                                    <td>{item.DESCRICAO}<br /><span style={{ fontSize: 11 }}>{item.REFERENCIA != 'SARJETA' && `(${this.state.meter[item.REFERENCIA] + ' '} / pallet)`}</span></td>
-                                    <td>{item.QTDE.toFixed(2).replace('.', ',').replace(/\d(?=(\d{3})+\,)/g, '$&.')}</td>
-                                    <td>0</td>
+                                    <td>{item.DESCRICAO}</td>
                                     <td>
-                                    <center>0
+                                    <center>
                                         <Progress value={0}
                                         className="mb-3"
                                         color="green"
@@ -404,7 +433,7 @@ class Construction extends Component {
                                     </center>
                                     </td>
                                     <td>
-                                    <center>0
+                                    <center>
                                         <Progress value={0}
                                         className="mb-3"
                                         color="green"
@@ -416,7 +445,7 @@ class Construction extends Component {
                                         </Progress>
                                     </center>
                                     </td>
-                                    <td>0</td>
+                                    <td>0 pallet</td>
                                 </tr>
                                 ))}
 
@@ -502,8 +531,6 @@ class Construction extends Component {
                                             <th>Veículo</th>
                                             <th>Placa</th>
                                             <th>Motorista</th>
-                                            <th>Qtd.</th>
-                                            <th style={{ width: 3 + '%' }}>Unid.</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -532,8 +559,6 @@ class Construction extends Component {
                                                         <td>{item.EQUIPAMENTO}</td>
                                                         <td>{item.CHASSI}</td>
                                                         <td>{item.NOME}</td>
-                                                        <td>{item.QTDMOV}</td>
-                                                        <td>{item.SIGLA}</td>
                                                     </tr>
                                                 </>
                                             )
