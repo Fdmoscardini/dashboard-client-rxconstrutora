@@ -634,7 +634,7 @@ class Construction extends Component {
                 <Modal isOpen={this.state.modalViewPdf} toggle={() => this.toggleModalViewPdf()} className={'modal-lg ' + this.props.className} style={{ maxWidth: isBrowser ? 90 + '%' : 100 + '%' }}>
                     <ModalHeader toggle={() => this.toggleModalViewPdf()}>Relatório diário</ModalHeader>
                     <ModalBody style={{ padding: 0 + 'px' }}>
-                        <div style={{ overflowX: 'scroll' }} hidden={!this.state.showPdf}>
+                        <div style={{ overflowX: 'scroll', overflowY: 'hidden' }} hidden={!this.state.showPdf}>
                             {this.state.itemDetailMeasurement.observ && 
                             <PDFReader 
                                 url={String(this.state.itemDetailMeasurement.observ)} 
