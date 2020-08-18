@@ -1,4 +1,4 @@
-import React, { Component, lazy, Suspense } from 'react';
+import React, { Component, lazy, Suspense, useRef } from 'react';
 import {
     Card,
     CardBody,
@@ -16,6 +16,7 @@ import {
 import 'chartjs-plugin-datalabels';
 import Calendar from '../../Components/Calendar/Calendar';
 import { PDFReader } from 'react-read-pdf'
+import ReactToPrint from 'react-to-print';
 
 import axios from "axios";
 
@@ -637,11 +638,18 @@ class Construction extends Component {
                     <ModalBody style={{ padding: 0 + 'px' }}>
                         <div style={{ overflowX: 'scroll', overflowY: 'hidden' }} hidden={!this.state.showPdf}>
                             {this.state.itemDetailMeasurement.observ && 
-                            <PDFReader 
-                                url={String(this.state.itemDetailMeasurement.observ)} 
-                                onDocumentComplete={(item) => this.setState({showPdf: true})}
-                                showAllPage={true}
-                            />}
+                            <>
+                                <ReactToPrint
+                                    trigger={() => <Button color="secondary" style={{marginLeft: 16, marginTop: 10}}>Imprimir</Button>}
+                                    content={() => this.componentRef}
+                                />
+                                <PDFReader 
+                                    ref={el => (this.componentRef = el)}
+                                    url={String(this.state.itemDetailMeasurement.observ)} 
+                                    onDocumentComplete={(item) => this.setState({showPdf: true})}
+                                    showAllPage={true}
+                                />
+                            </>}
                         </div>
                         <div hidden={this.state.showPdf}>
                             <center>
