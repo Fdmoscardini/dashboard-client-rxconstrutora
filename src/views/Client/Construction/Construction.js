@@ -41,6 +41,7 @@ class Construction extends Component {
         super(props);
 
         this.state = {
+            heightWindow: window.innerHeight,
             loadingProductionTotal: true,
             construction: {},
             productionTotal: [],
@@ -54,9 +55,10 @@ class Construction extends Component {
             modalSchedule: false,
             modalViewPdf: false,
             itemDetailMeasurement: {},
-            showPdf: false,
             measurementSheet: [],
             styleCardMovement: { padding: 0 + 'px' },
+            totalPage: 1,
+            arrayPages: [],
             images: {
                 'MEIO-FIO-65': 'http://www.rxconstrutora.com.br/site/wp-content/uploads/2020/06/meiofio.png',
                 'MEIO-FIO-80': 'http://www.rxconstrutora.com.br/site/wp-content/uploads/2020/06/meiofio.png',
@@ -105,7 +107,6 @@ class Construction extends Component {
     toggleModalViewPdf = (item = {}) => {
         this.setState({
             modalViewPdf: !this.state.modalViewPdf,
-            showPdf: false
         });
 
         if( item.data ) {
@@ -246,11 +247,9 @@ class Construction extends Component {
         try {
             let items = [];
             let measurement = await crud.get('construction/measurement_sheet/' + id);
-            //let occurrences = await crud.get('construction/occurrences/' + id);
 
             if (measurement.status == 200) {
                 items = measurement.data;
-                //items.push(...occurrences.data);
 
                 this.setState({
                     loadingMeasurementSheet: false,
@@ -634,30 +633,17 @@ class Construction extends Component {
                 </Modal>
 
                 <Modal isOpen={this.state.modalViewPdf} toggle={() => this.toggleModalViewPdf()} className={'modal-lg ' + this.props.className} style={{ maxWidth: isBrowser ? 90 + '%' : 100 + '%' }}>
-                    <ModalHeader toggle={() => this.toggleModalViewPdf()}>Relatório diário</ModalHeader>
+                    <ModalHeader toggle={() => this.toggleModalViewPdf()}>
+                        Relatório diário
+                    </ModalHeader>
                     <ModalBody style={{ padding: 0 + 'px' }}>
-                        <div style={{ overflowX: 'scroll', overflowY: 'hidden' }} hidden={!this.state.showPdf}>
                             {this.state.itemDetailMeasurement.observ && 
-                            <>
-                                <ReactToPrint
-                                    trigger={() => <Button color="secondary" style={{marginLeft: 16, marginTop: 10}}>Imprimir</Button>}
-                                    content={() => this.componentRef}
-                                />
-                                <PDFReader 
-                                    ref={el => (this.componentRef = el)}
-                                    url={String(this.state.itemDetailMeasurement.observ)} 
-                                    onDocumentComplete={(item) => this.setState({showPdf: true})}
-                                    showAllPage={true}
-                                />
-                            </>}
-                        </div>
-                        <div hidden={this.state.showPdf}>
-                            <center>
-                                {!isBrowser
-                                ? <img style={{ width: 100 + '%' }} src={'http://www.rxconstrutora.com.br/site/wp-content/uploads/2020/06/rx_vinheta4.gif'} />
-                                : <img style={{ width: 70 + '%' }} src={'http://www.rxconstrutora.com.br/site/wp-content/uploads/2020/06/rx_vinheta10.gif'} />}
-                            </center>
-                        </div>
+                            <iframe 
+                            src={String(this.state.itemDetailMeasurement.observ)} 
+                            style={{ 
+                                width: 100 + '%', 
+                                height: isBrowser ? this.state.heightWindow - 200 : this.state.heightWindow - 115
+                            }}></iframe>}
                     </ModalBody>
                     <ModalFooter>
                         <Button color="secondary" onClick={() => this.toggleModalViewPdf()}>Fechar</Button>
