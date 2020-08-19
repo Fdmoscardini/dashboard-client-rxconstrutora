@@ -23,7 +23,7 @@ const closeSession = () => {
  * @return {json} [id e token para autenticacao]
  */
 const getStorage = async () => {
-    const token = await localStorage.getItem('token');
+    const token = await localStorage.getItem('client_token');
     return {
         token: token ? token : '',
     }

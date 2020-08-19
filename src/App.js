@@ -22,9 +22,9 @@ class App extends Component {
   }
 
   access = async () => {
-    if (localStorage.getItem('id')) {
+    if (localStorage.getItem('client_id')) {
       await crud.post('log/', {
-        idUser: localStorage.getItem('id'),
+        idUser: localStorage.getItem('client_id'),
         description: 'access'
       });
     }
@@ -45,7 +45,7 @@ class App extends Component {
       <HashRouter>
           <React.Suspense fallback={loading()}>
             <Switch>
-              { ((!localStorage.getItem('role') || localStorage.getItem('role') == '')) 
+              { ((!localStorage.getItem('client_role') || localStorage.getItem('client_role') == '')) 
               ? <Route path="/login" name="Login" render={props => <Login {...props} />} />
               : !this.state.loading 
               ? <Route path="/" name="Home" render={props => <DefaultLayout {...props} />} />
@@ -57,7 +57,7 @@ class App extends Component {
               
               <Redirect
                 to={{
-                  pathname: (!localStorage.getItem('role') || localStorage.getItem('role') == '') ? '/login' : '/',
+                  pathname: (!localStorage.getItem('client_role') || localStorage.getItem('client_role') == '') ? '/login' : '/',
                 }}
               />
             </Switch>

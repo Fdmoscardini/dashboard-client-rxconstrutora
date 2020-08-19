@@ -131,8 +131,8 @@ class Construction extends Component {
 
     getWeather = async () => {
         try {
-            let lat = localStorage.getItem('latitude');
-            let lng = localStorage.getItem('longitude');
+            let lat = localStorage.getItem('client_latitude');
+            let lng = localStorage.getItem('client_longitude');
 
             axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&lang=pt_br&units=metric&appid=68365616a4b615d20ca6b4e983d119bb`)
             .then(res => {
@@ -268,7 +268,8 @@ class Construction extends Component {
             })
         }, 1000);
 
-        let id = localStorage.getItem('idConstruction');
+        let id = localStorage.getItem('client_idConstruction');
+
         this.getWeather();
         this.getTotalProduction(id);
         this.getDetailedPosition(id);
@@ -320,8 +321,8 @@ class Construction extends Component {
                                     </Col>
                                     <Col xs="12" md="8" xl="8">
                                         <h4>Gestor da obra</h4>
-                                        <h6>{localStorage.getItem('responsible')}</h6>
-                                        <h6>Contato: {localStorage.getItem('contact')}</h6>
+                                        <h6>{localStorage.getItem('client_responsible')}</h6>
+                                        <h6>Contato: {localStorage.getItem('client_contact')}</h6>
                                         <h6>Atualmente {this.state.employees.length} funcionários trabalhando na obra</h6>
                                     </Col>
                                     <Col xs="12" md="4" xl="4">

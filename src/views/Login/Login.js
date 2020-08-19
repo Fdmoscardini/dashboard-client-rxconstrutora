@@ -22,16 +22,16 @@ class Login extends Component {
       });
 
       if( result.status == 200 ) {
-        await localStorage.setItem('id', result.data.id);
-        await localStorage.setItem('name', result.data.name);
-        await localStorage.setItem('email', result.data.email);
-        await localStorage.setItem('token', result.data.token);
-        await localStorage.setItem('role', result.data.role);
-        await localStorage.setItem('idConstruction', result.data.idConstruction);
-        await localStorage.setItem('latitude', result.data.latitude);
-        await localStorage.setItem('longitude', result.data.longitude);
-        await localStorage.setItem('responsible', result.data.responsible);
-        await localStorage.setItem('contact', result.data.contact);
+        await localStorage.setItem('client_id', result.data.id);
+        await localStorage.setItem('client_name', result.data.name);
+        await localStorage.setItem('client_email', result.data.email);
+        await localStorage.setItem('client_token', result.data.token);
+        await localStorage.setItem('client_role', result.data.role);
+        await localStorage.setItem('client_idConstruction', result.data.idConstruction);
+        await localStorage.setItem('client_latitude', result.data.latitude);
+        await localStorage.setItem('client_longitude', result.data.longitude);
+        await localStorage.setItem('client_responsible', result.data.responsible);
+        await localStorage.setItem('client_contact', result.data.contact);
         window.location.href = '/';
       } else {
         this.setState({ 'error': 'Usuário ou senha incorretos' });

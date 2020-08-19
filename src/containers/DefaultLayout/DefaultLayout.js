@@ -68,9 +68,7 @@ class DefaultLayout extends Component {
                         )} />
                     ) : (null);
                   })}
-                  {localStorage.getItem('role') == 'client' 
-                  ? <Redirect from="/" to="/client/construction" />
-                  : <Redirect from="/" to="/movement" />}
+                  <Redirect from="/" to="/client/construction" />
                 </Switch>
               </Suspense>
             </Container>
