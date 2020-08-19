@@ -642,7 +642,8 @@ class Construction extends Component {
                             src={String(this.state.itemDetailMeasurement.observ)} 
                             style={{ 
                                 width: 100 + '%', 
-                                height: isBrowser ? this.state.heightWindow - 200 : this.state.heightWindow - 115
+                                height: isBrowser ? this.state.heightWindow - 200 : this.state.heightWindow - 115,
+                                backgroundColor: '#666'
                             }}></iframe>}
                     </ModalBody>
                     <ModalFooter>
