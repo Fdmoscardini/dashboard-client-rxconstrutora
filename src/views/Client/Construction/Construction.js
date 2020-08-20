@@ -296,39 +296,43 @@ class Construction extends Component {
                                     <Col xs="12" md="7" xl="7">
                                         <h4 style={{ marginBottom: 15 }}>{this.state.construction.DESCRICAO}</h4>
                                         <h5 style={{ marginBottom: 35 }}>{moment().format('LLLL')}</h5>
-                                        <center style={{marginBottom: 22}}>
+                                        <Row>
+                                            <Col xs="12" md="12" xl="12">
+                                                <hr />
+                                            </Col>
+                                            <Col xs="12" md="12" xl="12">
+                                                <h4>Gestor da obra</h4>
+                                                <h6>{localStorage.getItem('client_responsible')}</h6>
+                                                <h6>Contato: {localStorage.getItem('client_contact')}</h6>
+                                                <h6>Atualmente {this.state.employees.length} funcionários trabalhando na obra</h6>
+                                            </Col>
+                                        </Row>
+
+                                        {/*<center style={{marginBottom: 22}}>
                                             <a href="http://blog.rxconstrutora.com.br/" target="_blank" style={{ marginLeft: 10, marginRight: 10, fontSize: 18 }}>Blog</a>
                                             <a href="http://rxconstrutora.com.br/" target="_blank" style={{ marginLeft: 10, marginRight: 10, fontSize: 18 }}>Site</a>
                                             <a href="https://instagram.com/rxconstrutora" target="_blank" style={{ marginLeft: 10, marginRight: 10, fontSize: 18 }}>Instagram</a>
-                                        </center>
-                                        {!isBrowser && <hr />}
+                                        </center>*/}
                                     </Col>
-                                    <Col xs="12" md="2" xl="2">
-                                        <center>
-                                            <img src={`http://www.rxconstrutora.com.br/site/wp-content/uploads/2020/08/${this.state.weather.weather[0].icon}.png`} style={{width: 120, marginBottom: 10}} /><br />
-                                            <h3>{this.state.weather.weather[0].description}</h3>
-                                        </center>
-                                    </Col>
-                                    <Col xs="12" md="3" xl="3" style={{paddingTop: 18}}>
-                                        <h4 style={{ marginBottom: 15 }}>Máx {this.state.weather.main.temp_max.toFixed(0)} °C</h4>
-                                        <h4 style={{ marginBottom: 15 }}>Min &nbsp;{this.state.weather.main.temp_min.toFixed(0)} °C</h4>
-                                        <h4 style={{ marginBottom: 15 }}>Vento {this.state.weather.wind.speed} metros/seg</h4>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col xs="12" md="12" xl="12">
-                                        <hr />
-                                    </Col>
-                                    <Col xs="12" md="8" xl="8">
-                                        <h4>Gestor da obra</h4>
-                                        <h6>{localStorage.getItem('client_responsible')}</h6>
-                                        <h6>Contato: {localStorage.getItem('client_contact')}</h6>
-                                        <h6>Atualmente {this.state.employees.length} funcionários trabalhando na obra</h6>
-                                    </Col>
-                                    <Col xs="12" md="4" xl="4">
-                                        <Button block color="success" style={{ float: 'right', marginTop: isBrowser ? 8 : 25, marginBottom: 12 }} onClick={() => this.toggleModalSchedule()}>
-                                            Visualizar díario
-                                        </Button>
+                                    <Col xs="12" md="5" xl="5">
+                                        <Row>
+                                            <Col xs="12" md="5" xl="5">
+                                                <center>
+                                                    <img src={`http://www.rxconstrutora.com.br/site/wp-content/uploads/2020/08/${this.state.weather.weather[0].icon}.png`} style={{ width: 120, marginBottom: 10 }} /><br />
+                                                    <h3>{this.state.weather.weather[0].description}</h3>
+                                                </center>
+                                            </Col>
+                                            <Col xs="12" md="7" xl="7" style={{ paddingTop: 22 }}>
+                                                <h4 style={{ marginBottom: 15 }}>Máx {this.state.weather.main.temp_max.toFixed(0)} °C</h4>
+                                                <h4 style={{ marginBottom: 15 }}>Min &nbsp;{this.state.weather.main.temp_min.toFixed(0)} °C</h4>
+                                                <h4 style={{ marginBottom: 15 }}>Vento {this.state.weather.wind.speed} metros/seg</h4>
+                                            </Col>
+                                            <Col xs="12" md="12" xl="12" style={{ paddingTop: 18 }}>
+                                                <Button block color="success" style={{ float: 'right', marginTop: isBrowser ? 8 : 25, marginBottom: 12 }} onClick={() => this.toggleModalSchedule()}>
+                                                    Visualizar díario
+                                                </Button>
+                                            </Col>
+                                        </Row>
                                     </Col>
                                 </Row>
                             </CardBody>
