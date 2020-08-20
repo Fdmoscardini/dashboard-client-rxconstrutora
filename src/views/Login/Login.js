@@ -98,7 +98,7 @@ class Login extends Component {
                 <Card className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
                   <CardBody className="text-center">
                     <div>
-                      <h2>Gestão à Vista</h2>
+                      <h2>Diário de Obras</h2>
                       <p>Sistema para gerenciamento das obras. Projeto desenvolvido e mantido pela Rx Construtora.</p>
                     </div>
                   </CardBody>
