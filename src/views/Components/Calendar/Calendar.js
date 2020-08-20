@@ -221,6 +221,8 @@ const Appointment = withStyles(styles, { name: 'Appointment' })(({ classes, ...r
         onClick={(item) => {
             if(item.data.observ) {
                 toggleModalViewPdf(item);
+            } else {
+                alert('O arquivo PDF não está disponível no momento.');
             }
         }}
     />
