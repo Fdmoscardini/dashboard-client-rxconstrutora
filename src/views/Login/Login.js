@@ -99,7 +99,7 @@ class Login extends Component {
                   <CardBody className="text-center">
                     <div>
                       <h2>Diário de Obras</h2>
-                      <p>Sistema para gerenciamento das obras. Projeto desenvolvido e mantido pela Rx Construtora.</p>
+                      <p>Sistema de Gestão de Obras. Projeto desenvolvido e mantido pela Rx Construtora.</p>
                     </div>
                   </CardBody>
                 </Card>
