@@ -213,20 +213,22 @@ const CellBase = React.memo(({
 
 const TimeTableCell = withStyles(styles, { name: 'Cell' })(CellBase);
 
-const Appointment = withStyles(styles, { name: 'Appointment' })(({ classes, ...restProps }) => (
-    <Appointments.Appointment
-        {...restProps}
-        className={classes.appointment}
-        style={{ fontSize: 16 }}
-        onClick={(item) => {
-            if(item.data.observ) {
-                toggleModalViewPdf(item);
-            } else {
-                alert('O arquivo PDF não está disponível no momento.');
-            }
-        }}
-    />
-));
+const Appointment = withStyles(styles, { name: 'Appointment' })(({ classes, ...restProps }) => {
+    return (
+        <Appointments.Appointment
+            {...restProps}
+            className={classes.appointment}
+            style={{ fontSize: 16, backgroundColor: restProps.data.observ ? 'rgb(62, 166, 98)' : 'rgb(195, 226, 205)' }}
+            onClick={(item) => {
+                if (item.data.observ) {
+                    toggleModalViewPdf(item);
+                } else {
+                    alert('O arquivo PDF não está disponível no momento.');
+                }
+            }}
+        />
+    )
+});
 
 const AppointmentContent = withStyles(styles, { name: 'AppointmentContent' })(({ classes, ...restProps }) => (
     <Appointments.AppointmentContent {...restProps} className={classes.apptContent} />
