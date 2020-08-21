@@ -45,7 +45,7 @@ class App extends Component {
       <HashRouter>
           <React.Suspense fallback={loading()}>
             <Switch>
-              { ((!localStorage.getItem('client_role') || localStorage.getItem('client_role') == '')) 
+              { ((!localStorage.getItem('client_token') || localStorage.getItem('client_token') == '')) 
               ? <Route path="/login" name="Login" render={props => <Login {...props} />} />
               : !this.state.loading 
               ? <Route path="/" name="Home" render={props => <DefaultLayout {...props} />} />
@@ -57,7 +57,7 @@ class App extends Component {
               
               <Redirect
                 to={{
-                  pathname: (!localStorage.getItem('client_role') || localStorage.getItem('client_role') == '') ? '/login' : '/',
+                  pathname: (!localStorage.getItem('client_token') || localStorage.getItem('client_token') == '') ? '/login' : '/',
                 }}
               />
             </Switch>

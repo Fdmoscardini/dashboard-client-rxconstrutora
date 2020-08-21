@@ -328,7 +328,7 @@ class Construction extends Component {
                                                 <h4 style={{ marginBottom: 15 }}>Vento {this.state.weather.wind.speed} metros/seg</h4>
                                             </Col>
                                             <Col xs="12" md="12" xl="12" style={{ paddingTop: 18 }}>
-                                                <Button block color="success" style={{ float: 'right', marginTop: isBrowser ? 8 : 25, marginBottom: 12 }} onClick={() => this.toggleModalSchedule()}>
+                                                <Button block color="primary" style={{ float: 'right', marginTop: isBrowser ? 8 : 25, marginBottom: 12 }} onClick={() => this.toggleModalSchedule()}>
                                                     Visualizar díario
                                                 </Button>
                                             </Col>
