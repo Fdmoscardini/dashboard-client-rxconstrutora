@@ -43,7 +43,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="app flex-row align-items-center">
+      <div className="app flex-row align-items-center" style={{ backgroundImage: 'url(http://www.rxconstrutora.com.br/site/wp-content/uploads/2020/08/bg-logo-rx.png)' }}>
         <Container>
           <Row className="justify-content-center">
             <Col md="8">
