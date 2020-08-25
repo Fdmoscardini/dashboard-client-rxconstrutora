@@ -10,13 +10,6 @@ export const cancel = () => {
     this._source.cancel('Operação cancelada.')
 };
 
-const closeSession = () => {
-    localStorage.clear();
-    setTimeout(() => {
-        window.location.href = '/';
-    }, 300);
-}
-
 /**
  * Busca id e token no Storage para ser utilizado nas requisicoes
  * 
@@ -59,7 +52,6 @@ export const get = async (model, id = undefined, uri = undefined) => {
         return await api.get(url);
     } catch (error) {
         console.log(error);
-        closeSession();
     }
 };
 
@@ -86,7 +78,6 @@ export const post = async (model, data, uri = undefined) => {
         return await api.post(url, data);
     } catch (error) {
         console.log(error);
-        closeSession();
     }
 };
 
@@ -118,7 +109,6 @@ export const put = async (model, data, id = undefined, uri = undefined) => {
     try {
         return await api.put(url, data);
     } catch (error) {
-        closeSession();
     }
 };
 
@@ -147,6 +137,5 @@ export const exclude = async (model, id = undefined, uri = undefined) => {
     try {
         return await api.delete(url);
     } catch (error) {
-        closeSession();
     }
 };

@@ -23,10 +23,17 @@ class App extends Component {
 
   access = async () => {
     if (localStorage.getItem('client_id')) {
-      await crud.post('log/', {
+      let log = await crud.post('log/', {
         idUser: localStorage.getItem('client_id'),
         description: 'access'
       });
+      
+      if( !log ) {
+        localStorage.clear();
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 300);
+      }
     }
 
     setTimeout(() => {
