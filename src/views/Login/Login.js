@@ -22,6 +22,11 @@ class Login extends Component {
       });
 
       if( result.status == 200 ) {
+        if (result.data.role != 'client_role') {
+          this.setState({ 'error': 'Usuário ou senha incorretos' });
+          return;
+        }
+
         await localStorage.setItem('client_id', result.data.id);
         await localStorage.setItem('client_name', result.data.name);
         await localStorage.setItem('client_email', result.data.email);
