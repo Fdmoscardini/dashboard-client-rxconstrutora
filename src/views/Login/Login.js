@@ -22,7 +22,7 @@ class Login extends Component {
       });
 
       if( result.status == 200 ) {
-        if (result.data.role != 'client_role') {
+        if (result.data.role != 'client') {
           this.setState({ 'error': 'Usuário ou senha incorretos' });
           return;
         }
