@@ -395,7 +395,7 @@ class Construction extends Component {
                     <Col xs="12" lg="12">
                         <Card>
                         <CardHeader>
-                            <strong>SITUAÇÃO DOS PRODUTOS</strong>
+                            <strong>SITUAÇÃO DOS PALLETS</strong>
                         </CardHeader>
                         <CardBody style={{ padding: 0 + 'px' }}>
                             <Table responsive>
@@ -515,7 +515,7 @@ class Construction extends Component {
                         <Card>
                         <CardHeader>
                             <strong>
-                                POSIÇÃO DETALHADA DA OBRA
+                                MEDIÇÃO TOTAL DA OBRA
                             </strong>
                         </CardHeader>
                             <CardBody style={{ padding: 0 + 'px' }}>
