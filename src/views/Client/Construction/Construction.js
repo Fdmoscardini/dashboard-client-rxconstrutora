@@ -530,7 +530,7 @@ class Construction extends Component {
                                 </thead>
                                 <tbody>
                                     {this.state.detailedPosition.map((item, index) => (
-                                    <tr key={index}>
+                                    <tr key={index} style={{ backgroundColor: item.MOB.indexOf("[ADITIVO") === 0 ? '#ecf7ea' : 'white' }}>
                                         <td>
                                         <BrowserView>
                                             {item.MOB}
