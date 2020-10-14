@@ -519,7 +519,7 @@ class Construction extends Component {
                             </strong>
                         </CardHeader>
                             <CardBody style={{ padding: 0 + 'px' }}>
-                                <Table responsive>
+                                <Table responsive style={{ marginBottom: 0 }}>
                                 <thead>
                                     <tr>
                                     <th style={{ width: 42 + '%' }}>Descrição</th>
