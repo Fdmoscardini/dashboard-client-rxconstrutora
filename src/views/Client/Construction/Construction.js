@@ -304,7 +304,7 @@ class Construction extends Component {
                                                 <h4>Gestor da obra</h4>
                                                 <h6>{localStorage.getItem('client_responsible')}</h6>
                                                 <h6>Contato: {localStorage.getItem('client_contact')}</h6>
-                                                <h6>Atualmente {this.state.employees.length} funcionários trabalhando na obra</h6>
+                                                {/*<h6>Atualmente {this.state.employees.length} funcionários trabalhando na obra</h6>*/}
                                             </Col>
                                         </Row>
 
