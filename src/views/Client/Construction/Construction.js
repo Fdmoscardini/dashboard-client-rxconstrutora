@@ -131,8 +131,8 @@ class Construction extends Component {
 
     getWeather = async () => {
         try {
-            let lat = localStorage.getItem('client_latitude');
-            let lng = localStorage.getItem('client_longitude');
+            let lat = this.props.match.params.latitude;
+            let lng = this.props.match.params.longitude;
 
             axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&lang=pt_br&units=metric&appid=68365616a4b615d20ca6b4e983d119bb`)
             .then(res => {
@@ -262,13 +262,12 @@ class Construction extends Component {
     }
 
     async componentDidMount(){
+        let id = this.props.match.params.id;
         setInterval(() => {
             this.setState({
                 curTime: new Date().toLocaleString(),
             })
         }, 1000);
-
-        let id = localStorage.getItem('client_idConstruction');
 
         this.getWeather();
         this.getTotalProduction(id);
@@ -276,7 +275,7 @@ class Construction extends Component {
         this.getConstruction(id);
         this.getMeasurementSheet(id);
         this.getMovement(id);
-        this.getEmployees(id);
+        this.getEmployees(id)
 
         await this.getStockConstruction(id);
         await this.getProvided(id);
@@ -294,7 +293,12 @@ class Construction extends Component {
                             <CardBody>
                                 <Row>
                                     <Col xs="12" md="7" xl="7">
-                                        <h4 style={{ marginBottom: 15 }}>{this.state.construction.DESCRICAO}</h4>
+                                        <h4 style={{ marginBottom: 15 }}>
+                                            <a href="#/list-construction">
+                                                <i className="icon-arrow-left icons font-2xl d-block" style={{ marginRight: 10, float: 'left' }}></i>
+                                            </a>{' '}
+                                            {this.state.construction.DESCRICAO}
+                                        </h4>
                                         <h5 style={{ marginBottom: 35 }}>{moment().format('LLLL')}</h5>
                                         <Row>
                                             <Col xs="12" md="12" xl="12">
@@ -302,8 +306,8 @@ class Construction extends Component {
                                             </Col>
                                             <Col xs="12" md="12" xl="12">
                                                 <h4>Gestor da obra</h4>
-                                                <h6>{localStorage.getItem('client_responsible')}</h6>
-                                                <h6>Contato: {localStorage.getItem('client_contact')}</h6>
+                                                <h6>{atob(this.props.match.params.responsavel)}</h6>
+                                                <h6>Contato: {atob(this.props.match.params.contato)}</h6>
                                                 {/*<h6>Atualmente {this.state.employees.length} funcionários trabalhando na obra</h6>*/}
                                             </Col>
                                         </Row>

@@ -68,7 +68,7 @@ class DefaultLayout extends Component {
                         )} />
                     ) : (null);
                   })}
-                  <Redirect from="/" to="/client/construction" />
+                  <Redirect from="/" to="/list-construction" />
                 </Switch>
               </Suspense>
             </Container>

@@ -6,8 +6,8 @@ export default {
             class: ''
         },
         {
-            name: 'Obra',
-            url: '/client/construction',
+            name: 'Minhas Obras',
+            url: '/list-construction',
             icon: 'icon-puzzle',
         },
         /*{
