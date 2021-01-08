@@ -64,6 +64,8 @@ class Construction extends Component {
                 'MEIO-FIO-80': 'http://www.rxconstrutora.com.br/site/wp-content/uploads/2020/06/meiofio.png',
                 'T16F6N': 'http://www.rxconstrutora.com.br/site/wp-content/uploads/2020/06/16facesN.png',
                 'T16F8N': 'http://www.rxconstrutora.com.br/site/wp-content/uploads/2020/06/16facesN.png',
+                'T16F6V': 'http://www.rxconstrutora.com.br/site/wp-content/uploads/2020/06/16facesV.png',
+                'T16F8V': 'http://www.rxconstrutora.com.br/site/wp-content/uploads/2020/06/16facesV.png',
                 'T6A': 'http://www.rxconstrutora.com.br/site/wp-content/uploads/2020/06/intertravadoA.png',
                 'T6G': 'http://www.rxconstrutora.com.br/site/wp-content/uploads/2020/06/intertravadoG.png',
                 'T6N': 'http://www.rxconstrutora.com.br/site/wp-content/uploads/2020/06/intertravadoN.png',
@@ -82,6 +84,8 @@ class Construction extends Component {
                 'MEIO-FIO-80': 12,
                 'T16F6N': 15,
                 'T16F8N': 11,
+                'T16F6V': 15,
+                'T16F8V': 11,
                 'T6A': 12.5,
                 'T6G': 12.5,
                 'T6N': 14,
@@ -131,8 +135,8 @@ class Construction extends Component {
 
     getWeather = async () => {
         try {
-            let lat = this.props.match.params.latitude;
-            let lng = this.props.match.params.longitude;
+            let lat = this.props.match.params.lat;
+            let lng = this.props.match.params.lng;
 
             axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&lang=pt_br&units=metric&appid=68365616a4b615d20ca6b4e983d119bb`)
             .then(res => {
@@ -306,8 +310,8 @@ class Construction extends Component {
                                             </Col>
                                             <Col xs="12" md="12" xl="12">
                                                 <h4>Gestor da obra</h4>
-                                                <h6>{atob(this.props.match.params.responsavel)}</h6>
-                                                <h6>Contato: {atob(this.props.match.params.contato)}</h6>
+                                                <h6>{atob(this.props.match.params.responsible)}</h6>
+                                                <h6>Contato: {atob(this.props.match.params.contract)}</h6>
                                                 {/*<h6>Atualmente {this.state.employees.length} funcionários trabalhando na obra</h6>*/}
                                             </Col>
                                         </Row>

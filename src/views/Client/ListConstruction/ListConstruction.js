@@ -30,16 +30,9 @@ class ListConstruction extends Component {
             let id = localStorage.getItem('client_id');
             let response = await crud.get('user', id);
             if( response.status == 200 ) {
-                response.data.constructions.map(async (item) => {
-                    let construction = await crud.get(`construction/construction/${item.idConstruction}`);
-                    if( construction.status == 200 ) {
-                        this.setState({
-                            constructions: [
-                                ...this.state.constructions,
-                                {...construction.data, lat: item.latitude, lng: item.longitude, contato: item.contact, responsavel: item.responsible}
-                            ]
-                        });
-                    }
+                console.log(response);
+                this.setState({
+                    constructions: response.data.constructions
                 });
             }
         } catch (error) {
@@ -47,8 +40,8 @@ class ListConstruction extends Component {
         }
     }
 
-    goDetail = (id, lat, lng, contato, responsavel) => {
-        this.props.history.push(`/list-construction/construction/${id}/${lat}/${lng}/${btoa(contato)}/${btoa(responsavel)}`);
+    goDetail = (id, lat, lng, contract, responsible) => {
+        this.props.history.push(`/list-construction/construction/${id}/${lat}/${lng}/${btoa(contract)}/${btoa(responsible)}`);
     }
 
     componentDidMount() {
@@ -74,7 +67,7 @@ class ListConstruction extends Component {
                                             <td style={{ width: 75 + '%' }}>
                                                 <Row className="align-items-center">
                                                     <Col col="12" sm="12" md="12" xl className="mb-12 mb-xl-0" style={{ marginTop: 2, marginBotom: 2 }}>
-                                                        {item.DESCRICAO}
+                                                        {item.name}
                                                     </Col>
                                                 </Row>
                                             </td>
@@ -82,7 +75,7 @@ class ListConstruction extends Component {
                                                 <Row className="align-items-center">
                                                     <Button 
                                                         color="secondary" 
-                                                        onClick={() => this.goDetail(item.IDOBRA, item.lat, item.lng, item.contato, item.responsavel)}>
+                                                        onClick={() => this.goDetail(item.idConstruction, item.latitude, item.longitude, item.contact, item.responsible)}>
                                                         Visualizar
                                                     </Button>
                                                 </Row>
