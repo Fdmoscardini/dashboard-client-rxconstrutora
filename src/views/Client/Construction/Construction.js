@@ -62,6 +62,7 @@ class Construction extends Component {
             images: {
                 'MEIO-FIO-65': 'http://www.rxconstrutora.com.br/site/wp-content/uploads/2020/06/meiofio.png',
                 'MEIO-FIO-80': 'http://www.rxconstrutora.com.br/site/wp-content/uploads/2020/06/meiofio.png',
+                'MEIO-FIO-100': 'http://www.rxconstrutora.com.br/site/wp-content/uploads/2020/06/meiofio.png',
                 'T16F6N': 'http://www.rxconstrutora.com.br/site/wp-content/uploads/2020/06/16facesN.png',
                 'T16F8N': 'http://www.rxconstrutora.com.br/site/wp-content/uploads/2020/06/16facesN.png',
                 'T16F6V': 'http://www.rxconstrutora.com.br/site/wp-content/uploads/2020/06/16facesV.png',
@@ -82,6 +83,7 @@ class Construction extends Component {
             meter: {
                 'MEIO-FIO-65': 23.4,
                 'MEIO-FIO-80': 12,
+                'MEIO-FIO-100': 15,
                 'T16F6N': 15,
                 'T16F8N': 11,
                 'T16F6V': 15,
